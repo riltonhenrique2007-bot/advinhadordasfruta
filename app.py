@@ -11,8 +11,7 @@ st.write("Suba uma foto e minha IA vai dizer o que é!")
 # Carrega a IA
 @st.cache_resource
 def load_model():
-    # Isso força o Keras a usar o carregador antigo (Legacy)
-    return tf.keras.models.load_model('minha_ia.h5', compile=False, safe_mode=False)
+    return tf.keras.models.load_model('minha_ia.h5', compile=False)
 
 
 model = load_model()
