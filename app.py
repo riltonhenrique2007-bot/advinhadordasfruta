@@ -1,18 +1,20 @@
+import os
+os.environ['TF_USE_LEGACY_KERAS'] = '1' # Ativa o modo clássico
+
 import streamlit as st
 import tensorflow as tf
+import tf_keras as keras # Importamos a versão de compatibilidade
 from PIL import Image
 import numpy as np
 
-# Título do Site
+# Título
 st.set_page_config(page_title="Detector de Frutas", page_icon="🍎")
 st.title("🍎 Detector de Frutas Inteligente")
-st.write("Suba uma foto e minha IA vai dizer o que é!")
 
-# Carrega a IA
+# Carrega a IA usando o keras (não o tf.keras)
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model('minha_ia.h5', compile=False)
-
+    return keras.models.load_model('minha_ia.h5', compile=False)
 
 model = load_model()
 NOMES = ["LARANJA", "MAÇÃ", "MIRTILO", "PITAYA"]
