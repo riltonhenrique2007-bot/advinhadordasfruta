@@ -4,15 +4,15 @@ from PIL import Image
 import numpy as np
 
 # Título do Site
+st.set_page_config(page_title="Detector de Frutas", page_icon="🍎") # Opcional: ícone na aba
 st.title("🍎 Detector de Frutas Inteligente")
 st.write("Suba uma foto e minha IA vai dizer o que é!")
-
 
 # Carrega a IA
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model('minha_ia.h5')
-
+    # ADICIONAMOS O compile=False AQUI EMBAIXO:
+    return tf.keras.models.load_model('minha_ia.h5', compile=False)
 
 model = load_model()
 NOMES = ["LARANJA", "MAÇÃ", "MIRTILO", "PITAYA"]
@@ -22,7 +22,8 @@ foto = st.file_uploader("Escolha uma imagem...", type=["jpg", "png", "webp"])
 
 if foto is not None:
     img = Image.open(foto)
-    st.image(img, caption='Foto enviada', use_column_width=True)
+    # TROCAMOS PARA use_container_width:
+    st.image(img, caption='Foto enviada', use_container_width=True)
 
     # Prepara para a IA
     img = img.resize((224, 224))
