@@ -11,10 +11,10 @@ import numpy as np
 st.set_page_config(page_title="Detector de Frutas", page_icon="🍎")
 st.title("🍎 Detector de Frutas Inteligente")
 
-# Carrega a IA usando o keras (não o tf.keras)
 @st.cache_resource
 def load_model():
-    return keras.models.load_model('minha_ia.h5', compile=False)
+    # Tentativa de carregamento forçado
+    return keras.models.load_model('minha_ia.h5', compile=False, custom_objects=None)
 
 model = load_model()
 NOMES = ["LARANJA", "MAÇÃ", "MIRTILO", "PITAYA"]
